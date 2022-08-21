@@ -27,11 +27,11 @@ class HomePage extends StatelessWidget {
             () => Center(
               child: Column(
                 children: [
-                  Text(auth.user.value.name ?? '-'),
+                  Text(auth.user.value?.name ?? '-'),
                   const SizedBox(
                     height: 10.0,
                   ),
-                  Text(auth.user.value.email ?? '-')
+                  Text(auth.user.value?.email ?? '-')
                 ],
               ),
             ),
@@ -41,14 +41,14 @@ class HomePage extends StatelessWidget {
           ),
           Obx(
             () {
-              if (auth.user.value.avatar?.url != null) {
+              if (auth.user.value?.avatar?.url != null) {
                 return Center(
                   child: SizedBox(
                     width: 100,
                     height: 100,
                     child: GFAvatar(
                       backgroundImage:
-                          NetworkImage(auth.user.value.avatar?.url ?? ''),
+                          NetworkImage(auth.user.value?.avatar?.url ?? ''),
                     ),
                   ),
                 );

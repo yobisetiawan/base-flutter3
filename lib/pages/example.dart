@@ -18,6 +18,9 @@ class ExamplePage extends StatelessWidget {
           itemBuilder: (context, index) => ListTile(
             title: Text(c.list[index].title),
             subtitle: Text(c.list[index].slug),
+            onTap: () {
+              c.setSelectedItem(c.list[index]);
+            },
           ),
         ),
       ),
@@ -37,11 +40,55 @@ class ExampleFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var c = Get.find<ExampleController>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Example Crud Form'),
       ),
-      body: const Text('Ini Form'),
+      body: ListView(
+        padding: const EdgeInsets.all(20.0),
+        children: [
+         
+          Obx(
+            () {
+              var e = (c.error['title'] ?? []).join(', ');
+              return TextField(
+                controller: c.titleInput,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: 'Title',
+                  errorText: e != '' ? e : null,
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Obx(
+            () {
+              var e = (c.error['slug'] ?? []).join(', ');
+              return TextField(
+                controller: c.slugInput,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: 'Slug',
+                  errorText: e != '' ? e : null,
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                c.submitForm();
+              },
+              child: const Text('Submit')),
+        ],
+      ),
     );
   }
 }
