@@ -23,17 +23,25 @@ class HomePage extends StatelessWidget {
             height: 15,
           ),
           Obx(
-            () => Text(auth.user.value.email ?? 'No User'),
+            () => Center(
+              child: Text(auth.user.value.name ?? 'No Name'),
+            ),
           ),
-          Obx(
-            () => Text(auth.user.value.avatar?.url ?? 'No Image'),
+          const SizedBox(
+            height: 10.0,
           ),
           Obx(
             () {
               if (auth.user.value.avatar?.url != null) {
-                return GFAvatar(
-                  backgroundImage:
-                      NetworkImage(auth.user.value.avatar?.url ?? ''),
+                return Center(
+                  child: SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: GFAvatar(
+                      backgroundImage:
+                          NetworkImage(auth.user.value.avatar?.url ?? ''),
+                    ),
+                  ),
                 );
               }
               return const SizedBox();

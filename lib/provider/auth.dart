@@ -1,3 +1,4 @@
+import 'package:app3/configs/route_name.dart';
 import 'package:app3/models/user.dart';
 import 'package:app3/provider/api.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,15 @@ class AuthProvider extends GetxController {
 
     if (ress.isOk) {
       user(UserModel.fromJson(ress.body['data']));
+    }
+  }
+
+  checkAuth() async {
+    await setUser();
+    if (user.value.id == null) {
+      Get.offAllNamed(RouteName.login);
+    } else {
+      Get.offAllNamed(RouteName.home);
     }
   }
 }
