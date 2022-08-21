@@ -10,8 +10,8 @@ class LoginController extends GetxController {
   var error = <String, dynamic>{}.obs;
   var isLoading = false.obs;
 
-  final api = GetInstance().find<ApiProvider>();
-  final auth = GetInstance().find<AuthProvider>();
+  final api = Get.find<ApiProvider>();
+  final auth = Get.find<AuthProvider>();
 
   var emailInput = TextEditingController();
   var passInput = TextEditingController();
@@ -28,6 +28,10 @@ class LoginController extends GetxController {
     if (ress.isOk) {
       error.value = {};
       box.write(Env.storageToken, body!['token']);
+
+      api.onInit();
+
+      await auth.setUser();
       Get.offAllNamed(RouteName.home);
     } else {
       if (ress.statusCode == 422) {
@@ -50,5 +54,9 @@ class LoginController extends GetxController {
     Get.offAllNamed(RouteName.login);
 
     isLoading.value = false;
+  }
+
+  fetrchUser() async {
+    await auth.setUser();
   }
 }

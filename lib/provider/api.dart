@@ -12,8 +12,8 @@ class ApiProvider extends GetConnect {
 
       var token = box.read(Env.storageToken);
 
-      request.headers['accept'] = 'application/json';
-
+      request.headers['Accept'] = 'application/json';
+      request.headers['Connection'] = 'keep-alive';
       request.headers['Authorization'] = 'Bearer $token';
       request.headers['X-PUBLIC-TOKEN'] = Env.apiPublicToken;
 
@@ -21,11 +21,11 @@ class ApiProvider extends GetConnect {
     });
   }
 
-  Future<Response> login(Map data) => post('/auth/login', data); 
+  Future<Response> login(Map data) => post('/auth/login', data);
 
   Future<Response> register(Map data) => post('/auth/register', data);
 
   Future<Response> logout() => get('/auth/logout');
 
-  Future<Response> user() => get('/user', query: {'relations': 'addresses'});
+  Future<Response> user() => get('/user', query: {'relations': 'avatar'});
 }
