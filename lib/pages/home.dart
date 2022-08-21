@@ -1,3 +1,4 @@
+import 'package:app3/configs/route_name.dart';
 import 'package:app3/controllers/login.dart';
 import 'package:app3/provider/auth.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,15 @@ class HomePage extends StatelessWidget {
           ),
           Obx(
             () => Center(
-              child: Text(auth.user.value.name ?? 'No Name'),
+              child: Column(
+                children: [
+                  Text(auth.user.value.name ?? '-'),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(auth.user.value.email ?? '-')
+                ],
+              ),
             ),
           ),
           const SizedBox(
@@ -64,6 +73,15 @@ class HomePage extends StatelessWidget {
               c.logout();
             },
             child: const Text('Logout'),
+          ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(RouteName.example);
+            },
+            child: const Text('Example CRUD'),
           ),
         ],
       ),

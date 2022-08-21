@@ -28,4 +28,9 @@ class ApiProvider extends GetConnect {
   Future<Response> logout() => get('/auth/logout');
 
   Future<Response> user() => get('/user', query: {'relations': 'avatar'});
+
+  Future<Response> employeePosition() => get('/employee/positions');
+
+  Future<Response> employeePositionDelete(id) =>
+      delete('/employee/position/$id');
 }

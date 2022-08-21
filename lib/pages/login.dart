@@ -1,7 +1,6 @@
 import 'package:app3/controllers/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//import 'package:getwidget/getwidget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -32,13 +31,12 @@ class LoginPage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-        
-           Obx(
+          Obx(
             () {
               var e = (c.error['password'] ?? []).join(', ');
               return TextField(
                 controller: c.passInput,
-                 obscureText: true,
+                obscureText: true,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   labelText: 'Password',
@@ -47,7 +45,6 @@ class LoginPage extends StatelessWidget {
               );
             },
           ),
-
           const SizedBox(
             height: 15,
           ),
