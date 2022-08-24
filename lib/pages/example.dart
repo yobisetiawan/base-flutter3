@@ -19,14 +19,14 @@ class ExamplePage extends StatelessWidget {
             title: Text(c.list[index].title),
             subtitle: Text(c.list[index].slug),
             onTap: () {
-              c.setSelectedItem(c.list[index]);
+              c.editForm(c.list[index]);
             },
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          c.addForm();
+          c.createForm();
         },
         tooltip: 'Add',
         child: const Icon(Icons.add),
@@ -42,9 +42,11 @@ class ExampleFormPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var c = Get.find<ExampleController>();
 
+    String title = c.selectedItem.value != null ? 'Edit' : 'Create';
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Example Crud Form'),
+        title: Text('Example $title Form '),
       ),
       body: ListView(
         padding: const EdgeInsets.all(20.0),

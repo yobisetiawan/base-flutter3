@@ -24,19 +24,10 @@ class ExampleController extends GetxController with FormHelper {
   @override
   void onReady() {
     super.onReady();
-    fetchData();
+    fetchListData();
   }
 
-  setSelectedItem(item) {
-    selectedItem(item);
-
-    titleInput.text = selectedItem.value?.title ?? '';
-    slugInput.text = selectedItem.value?.slug ?? '';
-
-    Get.toNamed(RouteName.exampleForm);
-  }
-
-  fetchData() async {
+  fetchListData() async {
     isLoading.value = true;
     var ress = await api.employeePosition();
     Map<String, dynamic>? body = ress.body;
@@ -56,7 +47,16 @@ class ExampleController extends GetxController with FormHelper {
     slugInput.text = '';
   }
 
-  addForm() {
+  editForm(item) {
+    selectedItem(item);
+
+    titleInput.text = selectedItem.value?.title ?? '';
+    slugInput.text = selectedItem.value?.slug ?? '';
+
+    Get.toNamed(RouteName.exampleForm);
+  }
+
+  createForm() {
     clearState();
     Get.toNamed(RouteName.exampleForm);
   }
@@ -75,8 +75,8 @@ class ExampleController extends GetxController with FormHelper {
     }
 
     if (ress.isOk) {
-      await fetchData();
-      Get.toNamed(RouteName.example);
+      await fetchListData();
+      Get.back();
     } else {
       baseShowError(ress, error);
     }
@@ -86,8 +86,8 @@ class ExampleController extends GetxController with FormHelper {
 
   deleteItem() async {
     await api.employeePositionDelete(selectedItem.value?.id);
-    await fetchData();
-    Get.toNamed(RouteName.example);
+    await fetchListData();
+    Get.back();
   }
 
   confirm(BuildContext context) {
