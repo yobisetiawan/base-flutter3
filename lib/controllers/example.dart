@@ -101,6 +101,7 @@ class ExampleController extends GetxController with FormHelper {
       child: const Text("Continue"),
       onPressed: () {
         deleteItem();
+        Navigator.of(context).pop();
       },
     );
 
