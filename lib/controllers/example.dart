@@ -5,9 +5,10 @@ import 'package:app3/provider/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ExampleController extends GetxController {
+class ExampleController extends GetxController with FormHelper {
   var error = <String, dynamic>{}.obs;
   var isLoading = false.obs;
+  var isFormLoading = false.obs;
   var list = <ExampleModel>[].obs;
 
   final Rx<ExampleModel?> selectedItem = RxNullable<ExampleModel?>().setNull();
@@ -48,12 +49,63 @@ class ExampleController extends GetxController {
     isLoading.value = false;
   }
 
-  addForm() {
-    selectedItem(null);
+  clearState() {
+    selectedItem.value = null;
+    error.value = {};
     titleInput.text = '';
     slugInput.text = '';
+  }
+
+  addForm() {
+    clearState();
     Get.toNamed(RouteName.exampleForm);
   }
 
-  submitForm() {}
+  submitForm() async {
+    isFormLoading.value = true;
+
+    Response<dynamic> ress;
+
+    if (selectedItem.value?.id != null) {
+      ress = await api.employeePositionPut(selectedItem.value?.id,
+          {'title': titleInput.text, 'slug': slugInput.text, 'is_active': 1});
+    } else {
+      ress = await api.employeePositionPost(
+          {'title': titleInput.text, 'slug': slugInput.text, 'is_active': 1});
+    }
+
+    if (ress.isOk) {
+      await fetchData();
+      Get.toNamed(RouteName.example);
+    } else {
+      baseShowError(ress, error);
+    }
+
+    isFormLoading.value = false;
+  }
+
+  deleteItem() async {
+    await api.employeePositionDelete(selectedItem.value?.id);
+    await fetchData();
+    Get.toNamed(RouteName.example);
+  }
+
+  confirm(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: const Text("Cancel"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text("Continue"),
+      onPressed: () {
+        deleteItem();
+      },
+    );
+
+    confirmAlert(context, [cancelButton, continueButton],
+        title: 'Are you Sure', description: 'This cant be undone');
+  }
 }

@@ -21,9 +21,9 @@ class ApiProvider extends GetConnect {
     });
   }
 
-  Future<Response> login(Map data) => post('/auth/login', data);
+  Future<Response> login(data) => post('/auth/login', data);
 
-  Future<Response> register(Map data) => post('/auth/register', data);
+  Future<Response> register(data) => post('/auth/register', data);
 
   Future<Response> logout() => get('/auth/logout');
 
@@ -31,6 +31,12 @@ class ApiProvider extends GetConnect {
 
   Future<Response> employeePosition() => get('/employee/positions');
 
+  Future<Response> employeePositionPost(data) =>
+      post('/employee/positions', data);
+
+  Future<Response> employeePositionPut(id, data) =>
+      put('/employee/positions/$id', data);
+
   Future<Response> employeePositionDelete(id) =>
-      delete('/employee/position/$id');
+      delete('/employee/positions/$id');
 }

@@ -1,7 +1,6 @@
 import 'package:app3/provider/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//import 'package:getwidget/getwidget.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);

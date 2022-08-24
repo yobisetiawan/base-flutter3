@@ -49,7 +49,6 @@ class ExampleFormPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
-         
           Obx(
             () {
               var e = (c.error['title'] ?? []).join(', ');
@@ -82,11 +81,32 @@ class ExampleFormPage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          ElevatedButton(
-              onPressed: () {
-                c.submitForm();
-              },
-              child: const Text('Submit')),
+          Obx(
+            () => c.isFormLoading.value
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ElevatedButton(
+                    onPressed: () {
+                      c.submitForm();
+                    },
+                    child: const Text('Submit'),
+                  ),
+          ),
+          Obx(
+            () => c.selectedItem.value?.id != null
+                ? ElevatedButton(
+                    onPressed: () {
+                      c.confirm(context);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.red),
+                    ),
+                    child: const Text('Delete'),
+                  )
+                : const SizedBox(),
+          )
         ],
       ),
     );
