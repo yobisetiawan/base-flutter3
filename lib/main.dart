@@ -15,7 +15,6 @@ void main() async {
   ));
 }
 
-
 Future initialize() async {
   await GetStorage.init();
   Get.put(ApiProvider());

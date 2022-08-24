@@ -66,12 +66,12 @@ class ExampleController extends GetxController with FormHelper {
 
     Response<dynamic> ress;
 
+    var dt = {'title': titleInput.text, 'slug': slugInput.text, 'is_active': 1};
+
     if (selectedItem.value?.id != null) {
-      ress = await api.employeePositionPut(selectedItem.value?.id,
-          {'title': titleInput.text, 'slug': slugInput.text, 'is_active': 1});
+      ress = await api.employeePositionPut(selectedItem.value?.id, dt);
     } else {
-      ress = await api.employeePositionPost(
-          {'title': titleInput.text, 'slug': slugInput.text, 'is_active': 1});
+      ress = await api.employeePositionPost(dt);
     }
 
     if (ress.isOk) {
@@ -91,7 +91,6 @@ class ExampleController extends GetxController with FormHelper {
   }
 
   confirm(BuildContext context) {
-    // set up the buttons
     Widget cancelButton = TextButton(
       child: const Text("Cancel"),
       onPressed: () {
