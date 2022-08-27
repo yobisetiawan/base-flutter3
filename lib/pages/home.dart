@@ -65,23 +65,23 @@ class HomePage extends StatelessWidget {
             },
             child: const Text('Fetch User'),
           ),
-          const SizedBox(
-            height: 10.0,
-          ),
           ElevatedButton(
             onPressed: () {
               c.logout();
             },
             child: const Text('Logout'),
           ),
-          const SizedBox(
-            height: 10.0,
-          ),
           ElevatedButton(
             onPressed: () {
               Get.toNamed(RouteName.example);
             },
             child: const Text('Example CRUD'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(RouteName.changeAvatar);
+            },
+            child: const Text('Change Avatar'),
           ),
         ],
       ),

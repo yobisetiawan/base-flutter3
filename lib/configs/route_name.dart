@@ -7,4 +7,6 @@ abstract class RouteName {
 
   static const example = '/example';
   static const exampleForm = '/example-form';
+
+  static const changeAvatar = '/profile/change-avatar';
 }

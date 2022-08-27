@@ -29,6 +29,8 @@ class ApiProvider extends GetConnect {
 
   Future<Response> user() => get('/user', query: {'relations': 'avatar'});
 
+  Future<Response> changeAvatar(data) => post('/user/change-avatar', data);
+
   Future<Response> employeePosition() => get('/employee/positions');
 
   Future<Response> employeePositionPost(data) =>
