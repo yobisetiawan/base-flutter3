@@ -83,6 +83,12 @@ class HomePage extends StatelessWidget {
             },
             child: const Text('Change Avatar'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(RouteName.infinityScroll);
+            },
+            child: const Text('Infinniti Scroll'),
+          ),
         ],
       ),
     );

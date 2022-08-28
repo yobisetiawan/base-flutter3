@@ -9,4 +9,6 @@ abstract class RouteName {
   static const exampleForm = '/example-form';
 
   static const changeAvatar = '/profile/change-avatar';
+
+  static const infinityScroll = '/infinity-scroll';
 }

@@ -31,6 +31,9 @@ class ApiProvider extends GetConnect {
 
   Future<Response> changeAvatar(data) => post('/user/change-avatar', data);
 
+  Future<Response> serviceAppointment({Map<String, dynamic>? query}) =>
+      get('/service/appointments', query: query);
+
   Future<Response> employeePosition() => get('/employee/positions');
 
   Future<Response> employeePositionPost(data) =>
