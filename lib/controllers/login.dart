@@ -49,6 +49,8 @@ class LoginController extends GetxController {
     isLoading.value = true;
     await api.logout();
 
+    box.remove(Env.storageToken);
+
     Get.offAllNamed(RouteName.login);
 
     isLoading.value = false;
