@@ -29,8 +29,6 @@ class LoginController extends GetxController {
       error.value = {};
       box.write(Env.storageToken, body!['token']);
 
-      api.onInit();
-
       await auth.setUser();
       Get.offAllNamed(RouteName.home);
     } else {

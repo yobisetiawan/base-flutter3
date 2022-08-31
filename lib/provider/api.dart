@@ -11,11 +11,19 @@ class ApiProvider extends GetConnect {
       final box = GetStorage();
 
       var token = box.read(Env.storageToken);
+      var h = Env.apiHost;
 
       request.headers['Accept'] = 'application/json';
-      request.headers['Connection'] = 'keep-alive';
-      request.headers['Authorization'] = 'Bearer $token';
-      request.headers['X-PUBLIC-TOKEN'] = Env.apiPublicToken;
+
+      if (![
+        '$h/auth/login',
+        '$h/auth/register',
+      ].contains(request.url.toString())) {
+        if (token != null) {
+          request.headers['Authorization'] = 'Bearer $token';
+        }
+        request.headers['X-PUBLIC-TOKEN'] = Env.apiPublicToken;
+      }
 
       return request;
     });
@@ -44,4 +52,6 @@ class ApiProvider extends GetConnect {
 
   Future<Response> employeePositionDelete(id) =>
       delete('/employee/positions/$id');
+
+  Future<Response> fcm(data) => post('/user/notifications/fcm-token', data);
 }
