@@ -11,4 +11,6 @@ abstract class RouteName {
   static const changeAvatar = '/profile/change-avatar';
 
   static const infinityScroll = '/infinity-scroll';
+
+  static const ecomerce = '/ecomerce';
 }

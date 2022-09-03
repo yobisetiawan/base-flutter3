@@ -89,6 +89,12 @@ class HomePage extends StatelessWidget {
             },
             child: const Text('Infinniti Scroll'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Get.toNamed(RouteName.ecomerce);
+            },
+            child: const Text('Ecomerce'),
+          ),
         ],
       ),
     );

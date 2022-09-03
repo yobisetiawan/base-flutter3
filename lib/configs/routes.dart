@@ -1,5 +1,6 @@
 import 'package:app3/configs/route_name.dart';
 import 'package:app3/pages/change_avatar.dart';
+import 'package:app3/pages/ecomerce.dart';
 import 'package:app3/pages/example.dart';
 import 'package:app3/pages/home.dart';
 import 'package:app3/pages/infinity_scroll.dart';
@@ -15,7 +16,8 @@ class Routes {
     GetPage(name: RouteName.example, page: () => const ExamplePage()),
     GetPage(name: RouteName.exampleForm, page: () => const ExampleFormPage()),
     GetPage(name: RouteName.changeAvatar, page: () => const ChangeAvatarPage()),
-
-     GetPage(name: RouteName.infinityScroll, page: () => const InfinityScrollPage()),
+    GetPage(
+        name: RouteName.infinityScroll, page: () => const InfinityScrollPage()),
+    GetPage(name: RouteName.ecomerce, page: () => const EcomercePage()),
   ];
 }
