@@ -1,3 +1,4 @@
+import 'package:app3/components/yb_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -20,29 +21,55 @@ class EcomercePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Ecomerce'),
       ),
-      backgroundColor: Colors.red,
+      // backgroundColor: Colors.red,
       body: ListView(
         // padding: const EdgeInsets.all(20.0),
         children: [
-          GFCarousel(
-          //  pagerSize: 20.0,
-            hasPagination: true,
-             viewportFraction: 1.0,
-           // enlargeMainPage: true,
-            activeIndicator: Colors.white,
-            // rowCount: 1,
-            items: imageList.map(
-              (url) {
-                return Container(
-                //  margin: const EdgeInsets.all(5.0),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                    child: Image.network(url, fit: BoxFit.cover, width: 1000.0),
-                  ),
-                );
-              },
-            ).toList(),
+          Container(
+            padding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0),
+            child: YbCarousel(
+              // paginationPositionn: YbIndicatorPosition.,
+              //  pagerSize: 20.0,
+              hasPagination: true,
+              viewportFraction: 1.0,
+              //  enlargeMainPage: true,
+              activeIndicator: Colors.white,
+              // rowCount: 1,
+              items: imageList.map(
+                (url) {
+                  return Container(
+                    margin: const EdgeInsets.all(5.0),
+                    //margin: const EdgeInsets.only(bottom: 30.0),
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(5.0)),
+                      child:
+                          Image.network(url, fit: BoxFit.cover, width: 1000.0),
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
           ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(5.0, 0, 5.0, 0),
+            child: GFItemsCarousel(
+              rowCount: 3,
+              children: imageList.map(
+                (url) {
+                  return Container(
+                    margin: const EdgeInsets.all(5.0),
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(5.0)),
+                      child:
+                          Image.network(url, fit: BoxFit.cover, width: 1000.0),
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
+          )
         ],
       ),
     );
